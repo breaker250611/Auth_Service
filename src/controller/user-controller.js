@@ -25,5 +25,26 @@ const create = async (req, res) => {
     });
   }
 };
+const signIn = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const jwtToken = await userService.signIn(email, password);
+    return res.status(200).json({
+      data: jwtToken,
+      message: "Successfully signed in",
+      success: true,
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+      err: error,
+      data: {},
+    });
+  }
+};
 
-module.exports = { create };
+module.exports = { create, signIn };
