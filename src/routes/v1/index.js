@@ -8,4 +8,6 @@ router.post(
   userController.create
 );
 router.post("/signin", userController.signIn);
+
+router.get("/isAuthenticated", userController.isAuthenticated);
 module.exports = router;
