@@ -10,4 +10,17 @@ const validateUserAuth = (req, res, next) => {
   next();
 };
 
-module.exports = { validateUserAuth };
+const validateIsAdmingRequest = (req, res, next) => {
+  if (!req.body.id) {
+    return res.status(400).json({
+      message: "User ID is required",
+      success: false,
+      err: "Missing user ID",
+      data: {},
+    });
+  }
+
+  next();
+};
+
+module.exports = { validateUserAuth, validateIsAdmingRequest };

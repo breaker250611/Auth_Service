@@ -3,7 +3,7 @@ const apiRoutes = require("./routes/index");
 const serverConfig = require("./config/serverConfig");
 const bodyParser = require("body-parser");
 const app = express();
-
+const db = require("./models/index");
 const PORT = serverConfig.port;
 
 const prepareandstartServer = async () => {
@@ -12,6 +12,10 @@ const prepareandstartServer = async () => {
   app.use("/api", apiRoutes);
   app.listen(PORT, () => {
     console.log(`Auth Service is running on port ${PORT}`);
+
+    if (serverConfig.DB_SYNC) {
+      db.sequelize.sync({ alter: true });
+    }
   });
 };
 
