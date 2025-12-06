@@ -15,3 +15,5 @@ class ValidationError extends AppErrors {
     );
   }
 }
+
+module.exports = ValidationError;
